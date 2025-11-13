@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laura Boulus - Cybersécurité</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a3a52;
+            --light-navy: #2c5f7f;
+            --beige: #f5f1e8;
+            --cream: #faf8f3;
+            --gray: #4a4a4a;
+            --light-gray: #e8e8e8;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--gray);
+            background-color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--navy);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--navy);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 100%);
+        }
+
+        .hero .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--light-navy);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 20px 60px rgba(26, 58, 82, 0.15);
+            border: 8px solid var(--white);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--light-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(26, 58, 82, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Section commune */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--navy);
+        }
+
+        /* À propos */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+
+        .about-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--navy);
+        }
+
+        .about-card p {
+            line-height: 1.8;
+            color: var(--gray);
+        }
+
+        /* Timeline */
+        .timeline {
+            background: var(--white);
+            padding: 4rem;
+            border-radius: 20px;
+            margin: 3rem 0;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 3rem;
+            padding: 2rem 0;
+            border-left: 3px solid var(--navy);
+            padding-left: 3rem;
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 2rem;
+            width: 15px;
+            height: 15px;
+            background: var(--navy);
+            border-radius: 50%;
+            border: 3px solid var(--cream);
+        }
+
+        .timeline-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.3rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h5 {
+            font-size: 1.1rem;
+            color: var(--light-navy);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .timeline-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Réalisations */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--light-navy) 100%);
+            padding: 2rem;
+            color: var(--white);
+        }
+
+        .project-header h3 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-header .tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content p {
+            line-height: 1.8;
+            color: var(--gray);
+        }
+
+        /* Compétences */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .skill-category h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--navy);
+        }
+
+        .skill-item {
+            margin-bottom: 2rem;
+        }
+
+        .skill-item h4 {
+            font-size: 1.1rem;
+            color: var(--light-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-item p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        footer .social-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--beige);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero .container,
+            .about-grid,
+            .projects-grid,
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-image img {
+                width: 300px;
+                height: 300px;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">Laura Boulus</div>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#parcours">Parcours</a></li>
+                <li><a href="#realisations">Réalisations</a></li>
+                <li><a href="#competences">Compétences</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Laura Boulus</h1>
+                <p class="subtitle">Étudiante Ingénieure en Cybersécurité</p>
+                <p>Passionnée par la sécurité des systèmes d'information, je construis une expertise technique au service d'une vision humaine de la cybersécurité. Actuellement en alternance chez CFAO, je développe mes compétences en gestion des vulnérabilités et pentest.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Me contacter</a>
+                    <a href="#apropos" class="btn btn-secondary">En savoir plus</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="photo_linkedin.png" alt="Laura Boulus">
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos -->
+    <section id="apropos">
+        <h2 class="section-title">À propos de moi</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>Vision</h3>
+                <p>La cybersécurité est souvent présentée comme un univers dominé par la peur : peur des hackers, peur de l'erreur, peur de la faille. Mais derrière les chiffres, les vulnérabilités et les attaques, il y a une réalité humaine qu'il ne faut jamais perdre de vue.</p>
+                <p style="margin-top: 1rem;">Ma vision est que la cybersécurité doit aller au-delà du réflexe défensif. Elle doit devenir un outil de confiance, capable de rassurer et d'ouvrir des perspectives. Sécuriser un système, ce n'est pas seulement protéger des machines, c'est protéger des personnes et leurs usages.</p>
+            </div>
+
+            <div class="about-card">
+                <h3>Parcours</h3>
+                <p>Le chemin vers la cybersécurité s'est construit étape par étape, avec une volonté constante d'explorer les sciences et la technologie. Le Bac scientifique a posé les bases de la rigueur et de la méthode. Le DUT en génie électrique et informatique industrielle a offert une première immersion dans le concret.</p>
+                <p style="margin-top: 1rem;">Poursuivre avec un Bachelor puis un cycle ingénieur en cybersécurité a été une évidence, car ce domaine rassemble toutes les facettes recherchées : la technique, la stratégie et l'impact humain.</p>
+            </div>
+
+            <div class="about-card">
+                <h3>Valeurs</h3>
+                <p>Derrière les compétences techniques se trouvent des valeurs qui structurent chaque démarche : l'engagement, la persévérance et la bienveillance.</p>
+                <p style="margin-top: 1rem;">L'engagement, c'est la volonté d'aller au bout d'une mission. La persévérance, c'est cette capacité à chercher encore une solution, à ne pas se contenter de la première réponse. La bienveillance, enfin, est cette force qui permet de voir l'autre non comme un obstacle, mais comme un partenaire à accompagner.</p>
+            </div>
+
+            <div class="about-card">
+                <h3>Ambition</h3>
+                <p>Regarder vers l'avenir en cybersécurité, c'est accepter d'évoluer dans un environnement instable et exigeant. Mon ambition est de développer une expertise qui ne se contente pas de réagir, mais qui anticipe et structure.</p>
+                <p style="margin-top: 1rem;">L'objectif à long terme est clair : contribuer à bâtir des écosystèmes numériques où la confiance est le socle. Cela implique d'affiner mes compétences techniques, mais aussi d'apprendre à manager des équipes et à sensibiliser des publics variés.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parcours -->
+    <section id="parcours">
+        <h2 class="section-title">Parcours académique et professionnel</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-year">2020</div>
+                <div class="timeline-content">
+                    <h4>Baccalauréat Scientifique</h4>
+                    <h5>Lycée Supérieur Privé de La Celle-Saint-Cloud - Paris</h5>
+                    <p>Formation scientifique posant les bases de la rigueur et de la méthode analytique.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2020 - 2025</div>
+                <div class="timeline-content">
+                    <h4>ESIEA, Ivry-sur-Seine</h4>
+                    <h5>Expert Architecture des Systèmes d'Information</h5>
+                    <p>Titre certifié RNCP niveau 7 (équivalent Bac+5). Formation complète en cybersécurité couvrant les aspects techniques, stratégiques et humains de la sécurité des systèmes d'information.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2021 - 2022</div>
+                <div class="timeline-content">
+                    <h4>Projet FB Peinture</h4>
+                    <h5>Création de site web, affiches, flyers et stratégie digitale</h5>
+                    <p>Première expérience de coordination et de design graphique pour un projet entrepreneurial.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2021 - 2022</div>
+                <div class="timeline-content">
+                    <h4>Projet NLA Centre</h4>
+                    <h5>Chef de projet (équipe de 2 personnes)</h5>
+                    <p>Lien intergénérationnel entre étudiants et personnes âgées. Développement de compétences en gestion de projet et coordination d'équipe.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <div class="timeline-content">
+                    <h4>Thom Group</h4>
+                    <h5>Déploiement de la roadmap cybersécurité</h5>
+                    <p>Première expérience professionnelle dans le domaine de la cybersécurité au sein d'un groupe industriel.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2024 - 2026</div>
+                <div class="timeline-content">
+                    <h4>Alternance CFAO</h4>
+                    <h5>SI Project Manager Assistant - CFAO</h5>
+                    <p>Poursuite vers un master en Cybersécurité. Gestion des vulnérabilités, pentest et utilisation d'outils professionnels (Nessus, Nmap, Nikto, Patrowl, Hackuity).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Réalisations -->
+    <section id="realisations">
+        <h2 class="section-title">Réalisations</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Gestion des vulnérabilités</h3>
+                    <span class="tag">CFAO - Professionnel</span>
+                </div>
+                <div class="project-content">
+                    <p>Dans le cadre de l'alternance, l'une des missions centrales a été la gestion des vulnérabilités au sein d'un groupe international présent dans de nombreux pays d'Afrique. La complexité résidait dans la diversité des environnements, l'ampleur du parc informatique et la nécessité de prioriser les actions.</p>
+                    <p style="margin-top: 1rem;">L'utilisation d'outils tels que Patrowl, Nessus ou Uncovery a permis de cartographier les failles existantes. Un travail important a aussi été mené sur la communication : traduire des rapports techniques complexes en indicateurs clairs pour les managers et responsables pays.</p>
+                    <p style="margin-top: 1rem;"><strong>Résultat :</strong> Suivi précis des expositions critiques sur plusieurs filiales, et des remédiations mises en œuvre plus rapidement.</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Projet VOIP/TOIP</h3>
+                    <span class="tag">ESIEA - Académique</span>
+                </div>
+                <div class="project-content">
+                    <p>Dans le cadre d'un projet académique, la mise en place d'un serveur de téléphonie open source (3CX) a représenté un défi complet. Le projet couvrait plusieurs aspects techniques : installation du serveur, configuration de huit extensions, intégration de softphones open source et propriétaires, routage réseau, et mise en place de la qualité de service (QoS) via Pfsense.</p>
+                    <p style="margin-top: 1rem;">Au-delà de la configuration technique, l'expérience a permis de manipuler des outils d'analyse comme Wireshark pour capturer et interpréter les trames VoIP. La démarche incluait aussi la sécurisation : authentification, chiffrement des communications et rédaction d'un rapport documenté.</p>
+                    <p style="margin-top: 1rem;"><strong>Compétences :</strong> Infrastructure réseau, sécurité, VoIP, travail en équipe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="competences">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Compétences Techniques</h3>
+                
+                <div class="skill-item">
+                    <h4>Analyse de vulnérabilités</h4>
+                    <p>Expertise en identification, évaluation et priorisation des vulnérabilités. Maîtrise de Nessus, Patrowl, Uncovery. Suivi des CVE et bulletins de sécurité.</p>
+                </div>
+
+                <div class="skill-item">
+                    <h4>Pentest & Forensic</h4>
+                    <p>Reconnaissance (Amass, WhatWeb), scan et exploitation (Nmap), analyse de données (Wireshark), récupération de données (Photorec/TestDisk), sécurisation (VeraCrypt).</p>
+                </div>
+
+                <div class="skill-item">
+                    <h4>Infrastructure & Réseau</h4>
+                    <p>Configuration serveurs, routage réseau, QoS, téléphonie IP (3CX), analyse de trames, sécurisation des communications.</p>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Compétences Transverses</h3>
+                
+                <div class="skill-item">
+                    <h4>Communication technique</h4>
+                    <p>Capacité à transformer des données techniques en messages clairs et exploitables. Création de dashboards et rapports adaptés aux différents publics (managers, dirigeants, utilisateurs).</p>
+                </div>
+
+                <div class="skill-item">
+                    <h4>Leadership associatif</h4>
+                    <p>Expérience au sein d'Apolavsis : organisation d'activités, gestion de projets, coordination d'équipes, développement de l'écoute et de la capacité à gérer des situations sensibles.</p>
+                </div>
+
+                <div class="skill-item">
+                    <h4>Gestion de projet</h4>
+                    <p>Planification, priorisation, suivi de projets techniques en environnement professionnel et associatif. Adaptabilité et rigueur dans l'exécution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Laura Boulus - Tous droits réservés</p>
+        <div class="social-links">
+            <a href="mailto:lauraboulus01@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/laura-boulus/" target="_blank">LinkedIn</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255,255,255,0.7);">Paris, France</p>
+    </footer>
+</body>
+</html>
